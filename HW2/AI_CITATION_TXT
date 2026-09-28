@@ -1,0 +1,211 @@
+hello, i want to make a fun pie chart on jupyter noebook, can you give me an easy example and tell me what each step means
+
+Here is a quick, easy example using Matplotlib, the most common library for making charts in Python.
+
+Step-by-Step Code
+Python
+# Step 1: Import the plotting library
+import matplotlib.pyplot as plt
+
+# Step 2: Define your data
+activities = ['Sleeping', 'Coding', 'Eating', 'Overthinking']
+hours = [8, 7, 3, 6]
+colors = ['#4F81BD', '#C0504D', '#9BBB59', '#8064A2']
+explode = (0, 0, 0, 0.1)  # "Pops out" the 4th slice (Overthinking)
+
+# Step 3: Create the pie chart
+plt.figure(figsize=(6, 6))
+plt.pie(
+    hours, 
+    labels=activities, 
+    autopct='%1.1f%%', 
+    startangle=140, 
+    colors=colors, 
+    explode=explode,
+    shadow=True
+)
+
+# Step 4: Add a title and show the chart
+plt.title('How My Day Is Spent', fontsize=14, fontweight='bold')
+plt.show()
+What Each Step Means
+Importing the Library (import matplotlib.pyplot as plt)
+matplotlib.pyplot is Python’s standard visualization module. We give it the alias plt so we don't have to type out matplotlib.pyplot every time.
+
+Setting Up the Data
+
+activities: A list of text labels for each slice of the pie.
+
+hours: The actual numerical values that determine how large each slice will be relative to the total sum.
+
+colors: Hex codes (or simple names like 'red', 'blue') to make the chart look nice.
+
+explode: Tells Matplotlib to pull a slice out from the center. 0.1 offsets the 4th item (Overthinking), giving it a dramatic focus.
+
+Building the Chart (plt.pie(...))
+
+autopct='%1.1f%%': Automatically formats and displays the calculated percentages inside each slice with 1 decimal place (e.g., 33.3%).
+
+startangle=140: Rotates the starting point of the first slice counter-clockwise by 140 degrees so the layout looks balanced.
+
+shadow=True: Adds a drop shadow beneath the pie for a 3D effect.
+
+Displaying (plt.title & plt.show())
+
+plt.title(...): Adds a main header above the chart.
+
+plt.show(): Renders the final figure cleanly inside your Jupyter Notebook cell output.
+
+Want to try making this interactive using Plotly instead?
+
+Yes
+i uploaded it incorrectly, how do i reupload
+
+Assuming you are referring to a file or dataset in your Jupyter Notebook environment, here is how to re-upload it depending on how you are running Jupyter:
+
+Option 1: Using the Jupyter Interface (JupyterLab or Classic Notebook)
+Delete or overwrite the old file:
+
+In JupyterLab: Find the file in the File Browser panel on the left side, right-click it, and select Delete.
+
+In Classic Notebook: Check the checkbox next to the incorrect file in the file list and click the Trash Can icon (or Delete button) near the top.
+
+Upload the correct file:
+
+Click the Upload button (an upward arrow icon in JupyterLab, or the Upload button near the top right in Classic Notebook).
+
+Select your file and confirm the upload.
+
+Alternatively: Drag and drop the new file directly into the File Browser sidebar. If a file with the same name already exists, Jupyter will prompt you to overwrite it.
+
+Option 2: Uploading via Python Code
+If you uploaded a file directly inside a notebook cell (for example, in Google Colab or using ipywidgets), re-running the upload cell will prompt you to pick a new file:
+
+Python
+# For Google Colab
+from google.colab import files
+
+uploaded = files.upload()  # Re-running this cell opens the file picker again
+If you are working in a different setup (like VS Code, a remote server, or a specific platform), let me know which tool you're using so I can give you the exact steps!
+
+can you give me and example of a lollipop chart code, just baseline example please
+
+Here is a minimal, baseline example of a lollipop chart using Matplotlib.
+
+Python
+import matplotlib.pyplot as plt
+
+# 1. Data
+categories = ['A', 'B', 'C', 'D', 'E']
+values = [4, 7, 1, 8, 5]
+
+# 2. Plot stems (lines) and heads (markers)
+plt.stem(categories, values)
+
+# 3. Display
+plt.show()
+Custom Baseline (Alternative)
+If you want a traditional horizontal layout without the default base line that plt.stem includes, you can draw it using hlines and plot:
+
+Python
+import matplotlib.pyplot as plt
+
+categories = ['A', 'B', 'C', 'D', 'E']
+values = [4, 7, 1, 8, 5]
+
+# Draw horizontal stems from x=0 to x=value
+plt.hlines(y=categories, xmin=0, xmax=values, color='skyblue')
+
+# Draw the lollipop heads
+plt.plot(values, categories, 'o', color='dodgerblue')
+
+plt.show()
+thank you
+
+You're very welcome! Have fun creating your charts in Jupyter Notebook. Feel free to reach out whenever you want to try new visualization styles or need a hand with Python!
+
+can you make this code a better format "import pandas as pd
+
+import matplotlib.pyplot as plt
+
+
+
+# oad data
+
+df = pd.read_csv('/Users/summercollier/OEAS805/HW2/International_Coastal_Cleanup_20260908.csv')
+
+
+
+# Select columns and convert to numbers
+
+cols = ['Cigarette Butts', 'Plastic Pieces', 'Food Wrappers (candy, chips, etc.)', 
+
+        'Bottle Caps (Plastic)', 'Beverage Bottles (Plastic)', 'Straws, Stirrers']
+
+data[cols] = data[cols].apply(lambda x: pd.to_numeric(x.astype(str).str.replace(',', ''), errors='coerce'))
+
+
+
+#sum and plot directly
+
+data[cols].sum().sort_values().plot(kind='barh', color='coral')
+
+
+
+plt.title('Top Debris Types')
+
+plt.xlabel('Total Collected')
+
+plt.tight_layout()
+
+plt.show()"
+
+Here is the cleaned-up and improved code. Beyond fixing formatting, this fixes a subtle bug in your original code: df was created when reading the CSV, but the subsequent lines referenced data instead of df (which would cause a NameError).
+
+Python
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# 1. Load data
+file_path = '/Users/summercollier/OEAS805/HW2/International_Coastal_Cleanup_20260908.csv'
+df = pd.read_csv(file_path)
+
+# 2. Select columns to analyze
+cols = [
+    'Cigarette Butts',
+    'Plastic Pieces',
+    'Food Wrappers (candy, chips, etc.)',
+    'Bottle Caps (Plastic)',
+    'Beverage Bottles (Plastic)',
+    'Straws, Stirrers',
+]
+
+# 3. Clean numeric data (remove commas and handle non-numeric values)
+df[cols] = df[cols].apply(
+    lambda x: pd.to_numeric(x.astype(str).str.replace(',', ''), errors='coerce')
+)
+
+# 4. Calculate total counts and sort
+top_debris = df[cols].sum().sort_values()
+
+# 5. Plot data
+fig, ax = plt.subplots(figsize=(8, 4.5))
+top_debris.plot(kind='barh', color='coral', ax=ax)
+
+# 6. Customize labels and layout
+ax.set_title('Top Debris Types', fontsize=14, fontweight='bold', pad=12)
+ax.set_xlabel('Total Collected', fontsize=11)
+ax.set_ylabel('')  # Removes redundant y-axis label
+
+plt.tight_layout()
+plt.show()
+What was improved:
+Fixed Variable Name: Changed data[cols] to df[cols] so the DataFrame matches the variable name initialized during pd.read_csv().
+
+Removed Hidden Characters: Removed non-breaking space characters (\xa0) present in the original string list that can trigger SyntaxError.
+
+Explicit Plotting (Object-Oriented API): Switched to plt.subplots() and ax=ax. This is recommended PEP 8 practice and avoids unexpected layout overlaps when running multiple cells in Jupyter.
+
+Readable Multi-Line Formatting: Split the cols list and long function call onto separate lines for better readability.
+
+Cleaned Y-Axis: Added ax.set_ylabel('') so matplotlib doesn't display an auto-generated label over your category names.
