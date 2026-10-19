@@ -237,3 +237,36 @@ Plaintext
 MLP Regressor (10 hidden nodes)
 Mean squared error: 12.34
 R-squared: 0.85
+ow to change the name of your file on github
+
+To rename a file on GitHub, you can do it directly on the GitHub website or on your local machine using Git commands.
+
+Method 1: On the GitHub Website (Fastest)
+Navigate to the file you want to rename in your repository.
+
+Click the Edit icon (pencil icon) in the top-right corner of the file preview.
+
+In the filename field at the top, edit or replace the text to change the file name (you can also change the extension or path here).
+
+Scroll down to the Commit changes... section.
+
+Choose whether to commit directly to the current branch or create a new branch/pull request, then click Commit changes.
+
+Method 2: On Your Local Machine (Using Git CLI)
+If you have cloned the repository locally, use the git mv command so Git tracks the renaming history correctly:
+
+Open your terminal or command line in the repository directory.
+
+Run the git mv command specifying the old and new filenames:
+
+Bash
+git mv old_filename.py new_filename.py
+Commit the change:
+
+Bash
+git commit -m "Rename old_filename.py to new_filename.py"
+Push the update to GitHub:
+
+Bash
+git push origin main
+(Replace main with your target branch name if different).
